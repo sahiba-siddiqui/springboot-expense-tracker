@@ -1,6 +1,7 @@
 package com.example.expensetracker.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.time.LocalDate;
 
 @Entity
@@ -11,9 +12,17 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Title is required")
     private String title;
+
+    @NotBlank(message = "Category is required")
     private String category;
+
+    @NotNull(message = "Amount is required")
+    @Positive(message = "Amount must be greater than 0")
     private Double amount;
+
+    @NotNull(message = "Date is required")
     private LocalDate date;
 
     // Getters and setters
